@@ -6,6 +6,6 @@ __pychache__/
 .vscode
 .idea
 
+shop/.env
 
-.env
 media/
