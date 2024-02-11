@@ -1,0 +1,58 @@
+{% load static %}
+{% load humanize %}
+
+{% if order_items %}
+
+<div class="form_profile orders_item">
+    <h3 align="center" class="orders_profile_title">Заказы</h3>
+    <br>
+
+
+    <h5 align="center">Всего куплено <b>{{ order_items.total_quantity }}</b> товаров на сумму: <b>{{ order_items.total_price|intcomma }} руб.</b> </h5>
+
+    {% for order_item in order_items %}
+<div class="card mb-3 text-bg-light shadow-lg">
+    <div class="card-header">
+        <h5 class="card-title"><b>{{ order_item.product.name }}</b> {{ order_item.product.phone_memory }}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="row text-center">
+                <div class="col p-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control number" value="{{ order_item.quantity }}"
+                            readonly>
+                    </div>
+                </div>
+                <div class="col p-0">
+                    <p>x {{ order_item.product.sell_price }} руб. = </p>
+                </div>
+                <div class="col p-0"><strong>{{ order_item.products_price }} руб. </strong></div>
+
+
+                <div class="col p-0">
+
+                    <a href="{% url 'products:detail' order_item.product.slug %}" class="remove-from-cart" data-cart-id="">
+                        <img class="mx-1 img-cart" src="{{ order_item.product.image.url }}"
+                            alt="Catalog Icon" width="16" height="16">
+                    </a>
+
+
+                </div>
+
+            </div>
+                {% if order_item.product.discount %}
+                <p class="discount-cart">Со скидкой</p>
+                {% endif %}
+
+            <p>Дата заказа: <b>{{ order_item.date_create }}</b></p>
+
+
+        </li>
+    </ul>
+</div>
+    {% endfor %}
+
+</div>
+
+{% endif %}

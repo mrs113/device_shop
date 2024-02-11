@@ -1,0 +1,116 @@
+body {
+    background: url("../img/wallpaper.jpg") no-repeat center top fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    padding-top: 56px;
+}
+
+#start-purchase-btn {
+    background-color: #23364e;
+    border-color: #23364e;
+    color: white;
+    transition: all .3s;
+}
+
+#start-purchase-link {
+    text-decoration: none;
+    color: white;
+}
+
+a.nav-link {
+    transition: all .3s;
+}
+
+button#start-purchase-btn:hover {
+    background: black;
+}
+
+
+.brend-photo {
+height: 80px;
+margin-left: 50px;
+}
+
+
+.list-group-item {
+transition: all .3s;
+}
+
+.list-group-item:hover {
+background: black;
+}
+
+.gender {
+margin-left: 205px;
+font-size: 20px;
+
+}
+
+.man-a {
+color: white;
+transition: all .3s;
+}
+
+.man-a:hover {
+color: blue;
+}
+
+.woman-a {
+color: white;
+transition: all .3s;
+}
+
+.woman-a:hover {
+color: purple;
+}
+
+.header-right{
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.search-form {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 270px;
+  height: 50px;
+  border: 1px solid rgba(255,255,255, 30%);
+  padding-left: 5px;
+  padding-right: 10px;
+}
+/*input {
+  outline: 0;
+  border: none;
+  background: none;
+}*/
+.search-input {
+  color: #fff;
+  width: 90%;
+  height: 100%;
+  font-size: 15px;
+  outline: 0;
+  border: none;
+  background: none;
+}
+
+.cart-icon {
+  color: white;
+  width: 22px;
+  background: #343a40!important;
+}
+
+.dropdown-item:hover {
+background: black;
+color: white;
+}
+
+.btn-search {
+background: #343a40!important;
+}
+
+.h1-title {
+margin-left: 270px;
+}

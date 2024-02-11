@@ -1,0 +1,184 @@
+{% extends 'products/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="m-5 text-center text-black">{{ products.name }}</h1>
+    {% if products.image %}
+          <img class="card-img-top"
+               src="{{ products.image.url }}"
+               alt="image">
+
+      {% else %}
+          <img class="card-img"
+               src="{% static '360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg' %}"
+               alt="no image">
+
+    {% endif %}
+
+    <p>
+        <a href="{% url 'products:send_message' products.slug %}">Отправить по E-Mail</a>
+    </p>
+
+</div>
+
+
+
+
+<!-- КОММЕНТАРИИ -->
+<div class="container">
+    <div class="m-5">
+{% with comments.count as total_comments %}
+    <h2>
+        {{total_comments}} comment{{ total_comments|pluralize }}
+    </h2>
+{% endwith %}
+
+
+
+<!--        <i>{{comments2}} rating </i>-->
+
+<!--        -->
+
+        {% if comments %}
+        <h5 align="center">Средняя оценка: {{ comments.sum_rating }} <ion-icon name="star-outline" class="star_rating"></ion-icon> </h5>
+        {% endif %}
+
+{% for comment in comments %}
+    <div class="comment">
+        <i><p class="info">
+            <b>{{ comment.user }}</b> &diam;
+            {{ comment.created }}
+            {% if comment.updated > comment.created %}
+        <em>(изменено)</em>
+        {% endif %}
+        </p></i>
+        {{ comment.body|linebreaks }}
+
+
+
+
+        {% if comment.rating == 1 %}
+        <ul class="ul_rating">Оценка:
+            <li>
+                <b><ion-icon name="star-outline" class="star_rating"></ion-icon></b>
+            </li>
+        </ul>
+        {% endif %}
+
+
+        {% if comment.rating == 2 %}
+        <ul class="ul_rating">Оценка:
+            <li>
+                <b><ion-icon name="star-outline" class="star_rating"></ion-icon></b>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+        </ul>
+        {% endif %}
+
+
+        {% if comment.rating == 3 %}
+        <ul class="ul_rating">Оценка:
+            <li>
+                <b><ion-icon name="star-outline" class="star_rating"></ion-icon></b>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+        </ul>
+        {% endif %}
+
+
+        {% if comment.rating == 4 %}
+        <ul class="ul_rating">Оценка:
+            <li>
+                <b><ion-icon name="star-outline" class="star_rating"></ion-icon></b>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+        </ul>
+        {% endif %}
+
+
+        {% if comment.rating == 5 %}
+        <ul class="ul_rating">Оценка:
+            <li>
+                <b><ion-icon name="star-outline" class="star_rating"></ion-icon></b>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+            <li>
+                <ion-icon name="star-outline" class="star_rating"></ion-icon>
+            </li>
+        </ul>
+        {% endif %}
+
+<!--        Оценка: <b>{{ comment.rating }}</b> / 5-->
+        {% if comment.user == request.user %}
+        <a href="{% url 'products:comment_remove' comment.id %}"><button class="btn-danger">Удалить</button></a>
+        <br>
+        <br>
+        {% endif %}
+
+        {% if comment.user == request.user %}
+        <a href="{% url 'products:comment_update' comment.id %}"><button class="btn-warning">Изменить</button></a>
+        <br>
+        <br>
+        {% endif %}
+
+        {% if comment.update %}
+        <p>изменено</p>
+        {% endif %}
+
+
+    </div>
+
+{% empty %}
+    <p>Пока нет ни одного комментария.</p>
+{% endfor %}
+
+
+
+{% if new_comment %}
+    <h2>Твой комментарий был добавлен!</h2>
+ {% endif %}
+
+{% if user.is_authenticated %}
+
+<h2>Напишите комментарий</h2>
+<form action="{{ products.get_absolute_url }}" method="post">
+    {{ comment_form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Добавить</button>
+</form>
+
+
+{% else %}
+
+        <h2>Чтобы оставить комментарий нужно <a href="{% url 'users:login' %}">авторизироваться</a></h2>
+
+{% endif %}
+    </div>
+</div>
+{% endblock %}

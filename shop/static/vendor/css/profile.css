@@ -1,0 +1,35 @@
+body {
+    padding-top: 56px;
+}
+
+.sas {
+font-size: 25px;
+}
+
+.basket-image {
+height: 220px;
+}
+
+.form_profile {
+width: 500px;
+margin: 0px auto;
+padding: 50px;
+margin-top: -40px;
+background-color: #c3d18a;
+border: 1px solid rgba(0, 0, 0, .3);
+margin-bottom: 20px;
+border-radius: 10px;
+}
+
+.orders_item {
+width: 600px;
+background-color: grey;
+}
+
+.profile_input {
+margin-left: 100px;
+}
+
+.orders_profile_title {
+color: white;
+}

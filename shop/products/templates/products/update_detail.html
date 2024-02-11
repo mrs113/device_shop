@@ -1,0 +1,12 @@
+{% extends 'products/base.html' %}
+
+{% block content %}
+
+<h2>Измените комментарий</h2>
+<form action="#" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Добавить</button>
+</form>
+
+{% endblock %}
